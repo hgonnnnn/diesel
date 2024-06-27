@@ -212,6 +212,7 @@ body {
 .new_slide .title h2 {
     font-family: 'pretendard';
     font-size: 30px;
+    margin-bottom: 7px;
 }
 .new_slide .title p {
     font-size: 14px;
@@ -234,11 +235,11 @@ body {
 }
 
 .new_slide .new .swiper-slide .box .text {
-    height: 78px;
+    height: 95px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 7px 15px;
+    padding: 10px 15px;
 }
 .new_slide .new .swiper-slide .box .text span {
     font-size: 20px;
@@ -277,16 +278,20 @@ body {
 }
 .new_slide .new .swiper-slide .box .box_wrap .plus > p {
     font-weight: 500;
-    padding: 7px 15px 20px 15px;
+    padding: 15px 15px 25px 15px;
 }
 .new_slide .new .swiper-slide .box .box_wrap .plus > span {
     display: inline-block;
-    padding: 0 15px 10px 15px;
+    padding: 0 15px 25px 15px;
     font-size: 20px;
     font-weight: bold;
 }
+
 .new_slide .new .swiper-slide .box .box_wrap .plus .op {
-    padding: 0 15px 7px 15px;
+    padding: 0 15px 15px 15px;
+}
+.new_slide .new .swiper-slide .box .box_wrap .plus .op p:nth-child(1) {
+    margin-bottom: 10px;
 }
 .new_slide .new .swiper-slide .box .box_wrap .plus .op p span:hover {
     padding: 0 10px;
@@ -324,7 +329,10 @@ body {
     transition: background-color 0.5s;
     box-shadow: inset rgba(0, 0, 0, 0.2) 0px 4px 4px;
 }
-
+.swiper-button-next:after, .swiper-button-prev:after {
+    border: 2px solid #E4002B;
+    background-color: rgba(255, 255, 255, 0.7);
+}
 .img_box02 {
     margin: 120px 0;
     width: 100%;
@@ -338,12 +346,12 @@ body {
     height: 100%;
     object-fit: cover;
 }
-.new .button {
+.new .button, .new .button02 {
     display: flex;
     justify-content: center;
     margin-top: 24px;
 }
-.new .button p {
+.new .button p, .new .button02 p {
     width: 168px;
     height: 40px;
     font-size: 15px;
@@ -353,14 +361,20 @@ body {
     border: 2px solid #E4002B;
     font-size: 15px;
 }
-.new .button p:nth-child(1) {
-    border-radius: 10px 0 0 10px;
+.new .button p:nth-child(1){
+    background-color: #E4002B;
+    color: #fff;
+    box-shadow: inset rgba(0, 0, 0, 0.2) 0px 4px 4px;
 }
-.new .button p:nth-child(2) {
+.new .button02 p:nth-child(2) {
+    background-color: #E4002B;
+    color: #fff;
+    box-shadow: inset rgba(0, 0, 0, 0.2) 0px 4px 4px;
+}
+.new .button p:nth-child(2), .new .button02 p:nth-child(2) {
     border-left: 2px;
-    border-radius: 0 10px 10px 0;
 }
-.new .button p:hover {
+.new .button p:hover, .new .button02 p:hover {
     background-color: #E4002B;
     color: #fff;
     box-shadow: inset rgba(0, 0, 0, 0.2) 0px 4px 4px;
@@ -381,6 +395,7 @@ body {
     color: #fff;
     font-size: 30px;
     margin: 25px auto;
+    margin-top: 70px;
     display: inline-block;
 }
 .high .high_inner {
@@ -772,6 +787,9 @@ input[type="radio"]:checked+label:after {
     }
     .new_slide .new .swiper-slide .box {
         width: 294px;
+    }
+    .high h2 {
+        margin-top: 40px;
     }
     .high .high_inner {
         padding-bottom: 40px;
