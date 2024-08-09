@@ -7,11 +7,212 @@
     <title>Diesel</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="css/index.css">
+    <script src="lib/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            let slideplus = $('.icon');
+            let heart = $('.heart');
+            let plusitem = $('.plus');
+            let item = $('.box');
+            let size = $('.op span');
+            let slideBtn = $('.button p');
+            let slideBtn2 = $('.new_slide2 .button p');
+            let slideBtn3 = $('.button02 p');
+            let slideBtn4 = $('.new_slide4 .button02 p');
+            let menuBtn = $('.open_close');
+            let menuIcon = $('.menu_btn');
+            let mobileDepth01 = $('.mobile_nav .depth01');
+            let mobileDepth02 = $('.mobile_nav .depth02');
+
+
+            /* 모바일메뉴 옆 공간을 눌러도 닫기 활성화 */
+            $('.bg').click(function () {
+                $('body').removeClass('on');
+                $('.bg').removeClass('on');
+                $('.header').toggleClass('off');
+                $('.mobile_nav').slideUp();
+                $('.header').removeAttr('style');
+                
+                if (menuIcon.attr('src') === 'Diesel/icon/menu.svg') {
+                    menuIcon.attr('src', 'Diesel/icon/icons8-지우다-48.png')
+                } else {
+                    menuIcon.attr('src', 'Diesel/icon/menu.svg')
+                }
+            })
+
+            /* 모바일메뉴 버튼 클릭 시 닫기버튼 나타내기 */
+            menuBtn.click(function () {
+
+                /* 모바일nav 나타났을 때 스크롤 막기 */
+                if ($('.mobile_nav').css('display') === 'none') {
+                    /* 모바일 메뉴 활성화 시 스크롤 막는법 */
+                    $('.header').css({
+                        'opacity': '1',
+                        'transform': 'translateY(0)'
+                    })
+                } else {
+                    $('.header').removeAttr('style');
+                }
+
+                $('.mobile_nav').slideToggle();
+                $('body').toggleClass('on');
+                $('.bg').toggleClass('on');
+                $('.header').toggleClass('off');
+                mobileDepth02.css({
+                    'display': 'none'
+                })
+                if (menuIcon.attr('src') === 'Diesel/icon/menu.svg') {
+                    menuIcon.attr('src', 'Diesel/icon/icons8-지우다-48.png')
+                } else {
+                    menuIcon.attr('src', 'Diesel/icon/menu.svg')
+                }
+            });
+
+            /* 상단으로 올라가는 버튼 */
+            $(function () {
+                let topBtn = $('.up_btn');
+
+                topBtn.click(function () {
+                    $('html, body').animate({
+                        scrollTop: 0
+                    }, 700);
+                    $('.header').removeClass('on');
+                });
+                $(window).scroll(function () {
+                    // scrollTop() = 스크롤바 값
+                    if ($(window).scrollTop() > 0) {
+                        topBtn.css({
+                            'display': 'block'
+                        });
+                    } else {
+                        topBtn.css({
+                            'display': 'none'
+                        })
+                    }
+                });
+            });
+
+
+            /* 사이트 크기 줄어들었을 때 depth01영역 안움직이게 고정 */
+            /* 슬라이드 아이템 색상 추가 */
+
+            /* 모바일메뉴에 depth01 클릭 시 depth02 나타내기 */
+            mobileDepth01.click(function () {
+
+                if ($(this).next().css('display') === 'none') {
+                    // alert()
+                    mobileDepth02.slideUp();
+                    $(this).next().slideDown();
+
+                    mobileDepth01.css({
+                        'color': '#000'
+                    })
+                    $(this).css({
+                        'color': '#E4002B'
+                    })
+                } else {
+                    $(this).next().slideUp();
+                    $(this).css({
+                        'color': '#000'
+                    })
+                }
+            });
+
+            if ($(window).width() < 960) {
+                $('.plus').hide()
+            }
+
+            /* 슬라이드 아이템 +아이콘에 hover시 장바구니 담기 창 나타내기 */
+            slideplus.mouseenter(function () {
+                $(this).next().slideDown();
+
+            });
+
+
+            /* 슬라이드 하트 누르면 fill 하트로 변경 */
+            heart.click(function () {
+                if ($(this).attr('src') === 'Diesel/icon/red_heart.svg') {
+                    $(this).attr('src', 'Diesel/icon/fill_red_heart.svg')
+                } else {
+                    $(this).attr('src', 'Diesel/icon/red_heart.svg')
+                }
+            })
+
+            /* item mouseleave시 장바구니추가 없애기 */
+            item.mouseleave(function () {
+                plusitem.slideUp();
+            });
+
+            /* 슬라이드 아이템 사이즈 클릭 시 클래스명 on */
+            size.click(function () {
+                size.removeClass('on');
+                $(this).addClass('on');
+            });
+
+            /* 슬라이드 (men, women)버튼 클릭 시 클래스명 on  */
+            slideBtn.click(function () {
+                slideBtn.removeClass('on')
+                slideBtn.eq($(this).index()).addClass('on');
+                slideBtn2.removeClass('on')
+                slideBtn2.eq($(this).index()).addClass('on');
+
+
+                /* 슬라이드 (men, women)버튼 클릭 시 슬라이드 바뀜 */
+                $('.first_slide').removeClass('on')
+                $('.first_slide').eq($(this).index()).addClass('on');
+            });
+
+            /* Summer Must-Haves 슬라이드 버튼 */
+            slideBtn3.click(function () {
+                slideBtn3.removeClass('on')
+                slideBtn3.eq($(this).index()).addClass('on');
+                slideBtn4.removeClass('on')
+                slideBtn4.eq($(this).index()).addClass('on');
+
+                $('.second_slide').removeClass('on')
+                $('.second_slide').eq($(this).index()).addClass('on');
+            });
+
+        }); //script end
+    </script>
+    <script>
+        window.onload = () => {
+            let header = document.querySelector('.header');
+            let depth01 = document.querySelectorAll('.gnb li');
+
+            /* 마우스 스크롤 시 header 사라짐 */
+            window.addEventListener('wheel', (event) => {
+                let wheelScroll = event.deltaY;
+                if (wheelScroll > 0) {
+                    header.classList.add('on');
+                } else {
+                    header.classList.remove('on');
+                }
+            });
+
+            /* pc버전 header 효과 */
+            for (let i = 0; i < depth01.length; i++) {
+                depth01[i].addEventListener('mouseenter', () => {
+                    depth01.forEach((depth01Index) => {
+                        depth01Index.classList.remove('on');
+                    });
+                    depth01[i].classList.add('on');
+                });
+            }
+
+        }; //script end
+    </script>
 </head>
 
 <body>
+    <button class="up_btn">
+        <img src="Diesel/icon/up_icon.svg" alt="">
+    </button><!-- .up_btn end -->
     <div class="wrap">
         <header class="header">
+            <div class="bg">
+                <span>전체배경</span>
+            </div><!-- .bg end -->
             <h1 class="logo">
                 <a href="#">
                     <img src="Diesel/diesel로고.png" alt="logo">
@@ -65,11 +266,75 @@
                     <li>
                         <a href="#" class="depth01">Home</a>
                         <ul class="depth02">
-                           <li><a href="#">DIESEL LIVING</a></li> 
+                            <li><a href="#">DIESEL LIVING</a></li>
                         </ul>
                     </li>
                 </ul><!-- .gnb end -->
             </nav><!-- .nav end -->
+            <nav class="mobile_nav mobile">
+
+                <!-- <div class="button">
+                    <button class="close">
+                        <img src="Diesel/icon/icons8-지우다-48.png" alt="">
+                    </button>
+                </div>.button end -->
+
+                <ul class="gnb mobile">
+                    <li>
+                        <a href="#" class="depth01">Sale</a>
+                        <ul class="depth02">
+                            <li><a href="#">UP TO 40% OFF</a></li>
+                            <li><a href="#">Men</a></li>
+                            <li><a href="#">Women</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">New</a>
+                        <ul class="depth02">
+                            <li><a href="#">NEW ARRIVALS</a></li>
+                            <li><a href="#">MOST WANTED</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Denim</a>
+                        <ul class="depth02">
+                            <li><a href="#">Men</a></li>
+                            <li><a href="#">Women</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Men</a>
+                        <ul class="depth02">
+                            <li><a href="#">All</a></li>
+                            <li><a href="#">OUTER</a></li>
+                            <li><a href="#">TOP</a></li>
+                            <li><a href="#">BOTTOM</a></li>
+                            <li><a href="#">BAGS</a></li>
+                            <li><a href="#">SHOES</a></li>
+                            <li><a href="#">ACCESSORIES</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Women</a>
+                        <ul class="depth02">
+                            <li><a href="#">All</a></li>
+                            <li><a href="#">OUTER</a></li>
+                            <li><a href="#">TOP</a></li>
+                            <li><a href="#">BOTTOM</a></li>
+                            <li><a href="#">BAGS</a></li>
+                            <li><a href="#">SHOES</a></li>
+                            <li><a href="#">ACCESSORIES</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Home</a>
+                        <ul class="depth02">
+                            <li><a href="#">DIESEL LIVING</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav><!-- .mobile_nav end -->
+
             <div class="icon">
                 <ul class="icon_wrap">
                     <li><a href="#">
@@ -84,8 +349,8 @@
                     <li><a href="#">
                             <img src="Diesel/icon/bag.svg" alt="4">
                         </a></li>
-                    <li><a href="#">
-                            <img src="Diesel/icon/menu.svg" alt="5">
+                    <li><a href="#" class="open_close" onclick="return false">
+                            <img src="Diesel/icon/menu.svg" alt="5" class="menu_btn">
                         </a></li>
                 </ul><!-- .icon_wrap end -->
             </div><!-- .icon end -->
@@ -124,30 +389,32 @@
                 <div class="wrap">
                     <div class="box">
                         <a href="#">
-                            <img src="Diesel/item01.webp" alt="남성 데님">
+                            <img src="Diesel/item01.webp" alt="남성 데님" class="img1">
+                            <img src="Diesel/01_Module_Hero_Banner_M.webp" alt="" class="img2">
                         </a>
-                        <p>Men’s Denim<img src="Diesel/icon/화살표.svg"></p>
+                        <p><a href="#">Men’s Denim<img src="Diesel/icon/화살표.svg"></a></p>
                     </div>
                     <div class="box">
                         <a href="#">
                             <img src="Diesel/1DR.webp" alt="1DR 가방">
                         </a>
-                        <p>1DR Bags<img src="Diesel/icon/화살표.svg"></p>
+                        <p><a href="#">1DR Bags<img src="Diesel/icon/화살표.svg"></a></p>
                     </div>
                     <div class="box">
                         <a href="#">
-                            <img src="Diesel/item02.webp" alt="여성 데님">
+                            <img src="Diesel/item02.webp" alt="여성 데님" class="img1">
+                            <img src="Diesel/01_Module_Hero_Banner_W.jpg" alt="" class="img2">
                         </a>
-                        <p>Women’s Denim<img src="Diesel/icon/화살표.svg"></p>
+                        <p><a href="#">Women’s Denim<img src="Diesel/icon/화살표.svg"></a></p>
                     </div>
                 </div><!-- .wrap end -->
             </div><!-- .section01 end -->
 
             <div class="img_box01">
-                <img src="Diesel/01_Module_LP_campaing_runway_D.jpg" alt="메인이미지1">
+                <!-- <img src="Diesel/01_Module_LP_campaing_runway_D.jpg" alt="메인이미지1"> -->
             </div><!-- .img_box01 end -->
 
-            <div class="new_slide">
+            <div class="new_slide first_slide on">
                 <div class="title">
                     <h2>NEW ARRIVALS</h2>
                     <p>신규 발매</p>
@@ -157,45 +424,48 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="box">
-                                <figure><img src="Diesel/LX3001_00LEN_5066V_수정F.jpg" alt="선글라스"></figure>
+                                <figure><img src="Diesel/slide1/A06430_0GRDS_01_F.webp" alt="바텀"></figure>
                                 <div class="text">
-                                    <p>Wraparound style sunglasses</p>
-                                    <span>₩ 320,000</span>
+                                    <p>Denim shorts</p>
+                                    <span>₩ 280,000</span>
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
-                                        <div class="icon">
-                                            <figure><img src="Diesel/icon/red_heart.svg"></figure>
-                                            <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Denim shorts</p>
+                                        <span>₩ 280,000</span>
+                                        <div class="op">
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
+                                            <p>color:
+                                            <div></div>
+                                            <div></div>
+                                            </p>
                                         </div>
-                                        <div class="plus">
-                                            <p>Wraparound style sunglasses</p>
-                                            <span>₩ 320,000</span>
-                                            <div class="op">
-                                                <p>size: <span>ONE SIZE</span> </p>
-                                                <p>color: <div></div></p>
-                                            </div>
-                                            <a href="#">장바구니 담기</a>
-                                        </div><!-- plus end -->
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
                                 </div><!-- .box_wrap end -->
                             </div><!-- .box end -->
                         </div>
                         <div class="swiper-slide">
                             <div class="box">
-                                <figure><img src="Diesel/DZ2209_00QQQ_01_F.webp" alt="시계"></figure>
+                                <figure><img src="Diesel/slide1/A15269_0TJAY_141_F.webp" alt="탑"></figure>
                                 <div class="text">
-                                    <p>Scraper three-hand orange aluminum watch</p>
-                                    <span>₩ 429,000</span>
+                                    <p>Faded T-shirt with Oval D print</p>
+                                    <span>₩180,000</span>
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
-                                        <p>Scraper three-hand orange aluminum watch</p>
-                                        <span>₩ 429,000</span>
+                                        <p>Faded T-shirt with Oval D print</p>
+                                        <span>₩ 180,000</span>
                                         <div class="op">
-                                            <p>size: <span>ONE SIZE</span> </p>
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -212,14 +482,14 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
                                         <p>Faded tank top with puffy Oval D</p>
                                         <span>₩ 280,000</span>
                                         <div class="op">
-                                            <p>size: <span>M</span><span>L</span><span>XL</span></p>
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -237,7 +507,7 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
@@ -245,7 +515,8 @@
                                             mesh</p>
                                         <span>₩ 310,000</span>
                                         <div class="op">
-                                            <p>size: <span>250</span><span>260</span><span>270</span><span>280</span></p>
+                                            <p>size: <span>250</span><span>260</span><span>270</span><span>280</span>
+                                            </p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -262,14 +533,14 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
                                         <p>Cut-out jumper with Oval D</p>
                                         <span>₩ 750,000</span>
                                         <div class="op">
-                                            <p>size: <span>M</span><span>L</span><span>XL</span></p>
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -286,7 +557,7 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
@@ -310,14 +581,14 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
                                         <p>T-shirt with bleached Oval D logo</p>
                                         <span>₩ 160,000</span>
                                         <div class="op">
-                                            <p>size: <span>M</span><span>L</span><span>XL</span></p>
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -327,19 +598,407 @@
                         </div>
                     </div><!-- .swiper-wrapper end -->
                     <div class="button">
-                        <p>FOR MEN</p>
+                        <p class="on">FOR MEN</p>
                         <P>FOR WOMEN</P>
                     </div><!-- .button end -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div><!-- .new end -->
-            </div><!-- .new_slide end -->
+            </div> <!-- .new_slide end -->
+            <div class="new_slide2 first_slide">
+                <div class="title">
+                    <h2>NEW ARRIVALS</h2>
+                    <p>신규 발매</p>
+                </div><!-- .title end -->
+                <!-- Swiper -->
+                <div class="swiper new">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide2/Metallic tank top with chest slit.webp" alt="탑">
+                                </figure>
+                                <div class="text">
+                                    <p>Metallic tank top with chest slit</p>
+                                    <span>₩ 330,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Metallic tank top with chest slit</p>
+                                        <span>₩ 330,000</span>
+                                        <div class="op">
+                                            <p>size:
+                                                <span>XXS</span><span>XS</span><span>S</span><span>M</span><span>L</span>
+                                            </p>
+                                            <p>color:
+                                            <div></div>
+                                            <div></div>
+                                            </p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide2/X08396_P6248_T4216_F.webp" alt="백"></figure>
+                                <div class="text">
+                                    <p>1DR-Iconic shoulder bag in matte leather</p>
+                                    <span>₩ 1,120,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>1DR-Iconic shoulder bag in matte leather</p>
+                                        <span>₩ 1,120,000</span>
+                                        <div class="op">
+                                            <p>size: <span>ONE SIZE</span> </p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide2/A14736_0AJCL_5FYA_F.webp" alt="탑"></figure>
+                                <div class="text">
+                                    <p>Viscose T-shirt with poster print</p>
+                                    <span>₩ 280,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Viscose T-shirt with poster print</p>
+                                        <span>₩ 280,000</span>
+                                        <div class="op">
+                                            <p>size:
+                                                <span>XXS</span><span>XS</span><span>S</span><span>M</span><span>L</span>
+                                            </p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide2/A14062_0AJCL_5FYA_F.webp" alt="바텀"></figure>
+                                <div class="text">
+                                    <p>D-Airspeed Low-Striped sneakers in coated
+                                        mesh</p>
+                                    <span>₩ 430,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>D-Airspeed Low-Striped sneakers in coated
+                                            mesh</p>
+                                        <span>₩ 430,000</span>
+                                        <div class="op">
+                                            <p>size:
+                                                <span>XXS</span><span>XS</span><span>S</span><span>M</span><span>L</span>
+                                            </p>
+                                            </p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide2/X09100_P6019_H7296_F.webp" alt="백"></figure>
+                                <div class="text">
+                                    <p>Play-Shoulder bag in printed glossy PU</p>
+                                    <span>₩ 610,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Play-Shoulder bag in printed glossy PU</p>
+                                        <span>₩ 610,000</span>
+                                        <div class="op">
+                                            <p>size: <span>ONE SIZE</span></p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide2/A14054_0AJCL_377A_C.webp" alt="탑"></figure>
+                                <div class="text">
+                                    <p>Midi dress with asymmetric overlay</p>
+                                    <span>₩ 850,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Midi dress with asymmetric overlay</p>
+                                        <span>₩ 850,000</span>
+                                        <div class="op">
+                                            <p>size:
+                                                <span>XXS</span><span>XS</span><span>S</span><span>M</span><span>L</span>
+                                            </p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide2/A12774_0GRDQ_100_F.webp" alt="탑"></figure>
+                                <div class="text">
+                                    <p>Tube top in clean-wash denim</p>
+                                    <span>₩ 330,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Tube top in clean-wash denim</p>
+                                        <span>₩ 330,000</span>
+                                        <div class="op">
+                                            <p>size:
+                                                <span>XXS</span><span>XS</span><span>S</span><span>M</span><span>L</span>
+                                            </p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                    </div><!-- .swiper-wrapper end -->
+                    <div class="button">
+                        <p class="on">FOR MEN</p>
+                        <P>FOR WOMEN</P>
+                    </div><!-- .button end -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div><!-- .new end -->
+            </div> <!-- .new_slide2 end -->
 
             <div class="img_box02">
-                <img src="Diesel/01_Module_SS24_Sale_D_2.webp" alt="메인이미지2">
+                <!-- <img src="Diesel/01_Module_SS24_Sale_D_2.webp" alt="메인이미지2"> -->
             </div><!-- .img_box01 end -->
 
-            <div class="new_slide">
+            <div class="new_slide3 second_slide on">
+                <div class="title">
+                    <h2>Summer Must-Haves</h2>
+                    <p>핫한 여름에 꼭 필요한 아이템</p>
+                </div><!-- .title end -->
+                <!-- Swiper -->
+                <div class="swiper new">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide4/A12498_0GRAI_100_F.webp" alt="탑"></figure>
+                                <div class="text">
+                                    <p>T-shirt with glitchy logo</p>
+                                    <span>₩ 90,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>T-shirt with glitchy logo</p>
+                                        <span>₩ 90,000</span>
+                                        <div class="op">
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide4/A14015_0KMAG_9XX_F.webp" alt="바텀"></figure>
+                                <div class="text">
+                                    <p>Sweat shorts with Diesel embroiderys</p>
+                                    <span>₩ 280,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Sweat shorts with Diesel embroidery</p>
+                                        <span>₩ 280,000</span>
+                                        <div class="op">
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide4/A14016_0KMAH_9XX_F.webp" alt="탑"></figure>
+                                <div class="text">
+                                    <p>Faded T-shirt with tonal embroidery</p>
+                                    <span>₩ 180,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Faded T-shirt with tonal embroidery</p>
+                                        <span>₩ 180,000</span>
+                                        <div class="op">
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide4/LX1005_00LEN_112J2_F.jpg" alt="선글라스"></figure>
+                                <div class="text">
+                                    <p>Racer shape sunglasses in metal</p>
+                                    <span>₩ 340,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Racer shape sunglasses in metal</p>
+                                        <span>₩ 340,000</span>
+                                        <div class="op">
+                                            <p>size: <span>ONE SIZE</span></p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide4/A14018_0DRAM_9XX_F.webp" alt="탑"></figure>
+                                <div class="text">
+                                    <p>T-shirt with inside-out print</p>
+                                    <span>₩ 220,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>T-shirt with inside-out print</p>
+                                        <span>₩ 220,000</span>
+                                        <div class="op">
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide4/A14003_0AJDC_9XX_F (1).webp" alt="탑"></figure>
+                                <div class="text">
+                                    <p>Faded tank top with graphic print</p>
+                                    <span>₩ 180,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Faded tank top with graphic print</p>
+                                        <span>₩ 180,000</span>
+                                        <div class="op">
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
+                                            </p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box">
+                                <figure><img src="Diesel/slide4/A10996_0IAJH_9XX_F.webp" alt="바텀"></figure>
+                                <div class="text">
+                                    <p>Sweat shorts with injection molded logo</p>
+                                    <span>₩ 240,000</span>
+                                </div><!-- .text end -->
+                                <div class="box_wrap">
+                                    <div class="icon">
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
+                                        <figure><img src="Diesel/icon/plus.svg"></figure>
+                                    </div>
+                                    <div class="plus">
+                                        <p>Sweat shorts with injection molded logo</p>
+                                        <span>₩ 240,000</span>
+                                        <div class="op">
+                                            <p>size: <span>S</span><span>M</span><span>L</span><span>XL</span></p>
+                                            <p>color:</p>
+                                        </div>
+                                        <a href="#">장바구니 담기</a>
+                                    </div><!-- plus end -->
+                                </div><!-- .box_wrap end -->
+                            </div><!-- .box end -->
+                        </div>
+                    </div><!-- .swiper-wrapper end -->
+                    <div class="button02">
+                        <p class="on">FOR MEN</p>
+                        <P>FOR WOMEN</P>
+                    </div><!-- .button end -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div> <!-- .new_slide3 end -->
+            <div class="new_slide4 second_slide ">
                 <div class="title">
                     <h2>Summer Must-Haves</h2>
                     <p>핫한 여름에 꼭 필요한 아이템</p>
@@ -356,7 +1015,7 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
@@ -380,14 +1039,16 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
                                         <p>Camisole with destroyed layers</p>
                                         <span>₩ 370,000</span>
                                         <div class="op">
-                                            <p>size: <span>XXS</span><span>XS</span><span>S</span><span>M</span></p>
+                                            <p>size:
+                                                <span>XXS</span><span>XS</span><span>S</span><span>M</span><span>L</span>
+                                            </p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -404,7 +1065,7 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
@@ -428,14 +1089,16 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
                                         <p>>Denim bra top with Oval D plaque</p>
                                         <span>₩ 520,000</span>
                                         <div class="op">
-                                            <p>size: <span>XXS</span><span>XS</span><span>S</span><span>M</span></p>
+                                            <p>size:
+                                                <span>XXS</span><span>XS</span><span>S</span><span>M</span><span>L</span>
+                                            </p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -452,14 +1115,15 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
                                         <p>D-Venus-Slingback pumps in nappa leather</p>
                                         <span>₩ 800,000</span>
                                         <div class="op">
-                                            <p>size: <span>220</span><span>230</span><span>240</span><span>250</span></p>
+                                            <p>size: <span>220</span><span>230</span><span>240</span><span>250</span>
+                                            </p>
                                             <p>color:</p>
                                         </div>
                                         <a href="#">장바구니 담기</a>
@@ -476,7 +1140,7 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
@@ -500,7 +1164,7 @@
                                 </div><!-- .text end -->
                                 <div class="box_wrap">
                                     <div class="icon">
-                                        <figure><img src="Diesel/icon/red_heart.svg"></figure>
+                                        <figure><img src="Diesel/icon/red_heart.svg" class="heart"></figure>
                                         <figure><img src="Diesel/icon/plus.svg"></figure>
                                     </div>
                                     <div class="plus">
@@ -517,172 +1181,173 @@
                         </div>
                     </div><!-- .swiper-wrapper end -->
                     <div class="button02">
-                        <p>FOR MEN</p>
+                        <p class="on">FOR MEN</p>
                         <P>FOR WOMEN</P>
                     </div><!-- .button end -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
-            </div>
-                <div class="high">
+            </div> <!-- .new_slide4 end -->
 
-                    <div class="inner">
+            <div class="high">
 
-                        <div class="title">
-                            <h2>Highlights</h2>
-                        </div><!-- .title end -->
+                <div class="inner">
 
-                        <div class="high_inner">
+                    <div class="title">
+                        <h2>Highlights</h2>
+                    </div><!-- .title end -->
 
+                    <div class="high_inner">
+
+                        <div class="item">
+                            <a href="#">
+                                <figure>
+                                    <img src="Diesel/17_Module_denimdocumentary_LP_hero_M.webp" alt="아이템1">
+                                </figure>
+                                <p>Behind the Denim</p>
+                            </a>
+                        </div><!-- .item end -->
+
+                        <div class="item_wrap">
                             <div class="item">
                                 <a href="#">
                                     <figure>
-                                        <img src="Diesel/17_Module_denimdocumentary_LP_hero_M.webp" alt="아이템1">
+                                        <img src="Diesel/08_Module_NTSxDSL.webp" alt="아이템2">
                                     </figure>
-                                    <p>Behind the Denim</p>
+                                    <p>NTS x Diesel Tracks</p>
                                 </a>
-                            </div><!-- .item end -->
+                            </div>
+                            <div class="item">
+                                <a href="#">
+                                    <figure>
+                                        <img src="Diesel/08_Module_FW24runway.webp" alt="아이템3">
+                                    </figure>
+                                    <p>FW24 Runway Show</p>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="#">
+                                    <figure>
+                                        <img src="Diesel/08_module_magazine_dieselloveslee.webp" alt="아이템4">
+                                    </figure>
+                                    <p>DIESEL❤VES LEE</p>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="#">
+                                    <figure>
+                                        <img src="Diesel/18_Module_w07_denim_M.jpg" alt="아이템5">
+                                    </figure>
+                                    <p>Men’s Denim</p>
+                                </a>
+                            </div>
+                        </div><!-- .item end -->
+                    </div><!-- .high_inner end -->
+                </div>
+            </div><!-- .high end -->
 
-                            <div class="item_wrap">
-                                <div class="item">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="Diesel/08_Module_NTSxDSL.webp" alt="아이템2">
-                                        </figure>
-                                        <p>NTS x Diesel Tracks</p>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="Diesel/08_Module_FW24runway.webp" alt="아이템3">
-                                        </figure>
-                                        <p>FW24 Runway Show</p>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="Diesel/08_module_magazine_dieselloveslee.webp" alt="아이템4">
-                                        </figure>
-                                        <p>DIESEL❤VES LEE</p>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="Diesel/18_Module_w07_denim_M.jpg" alt="아이템5">
-                                        </figure>
-                                        <p>Men’s Denim</p>
-                                    </a>
-                                </div>
-                            </div><!-- .item end -->
-                        </div><!-- .high_inner end -->
-                    </div>
-                </div><!-- .high end -->
+            <div class="sns">
+                <div class="item_wrap">
+                    <div class="item">
+                        <a href="#">
+                            <figure>
+                                <img src="Diesel/icon/sns_instagram.svg" alt="인스타그램">
+                            </figure>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <figure>
+                                <img src="Diesel/icon/sns_facebook.svg" alt="페이스북">
+                            </figure>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <figure>
+                                <img src="Diesel/icon/sns_youtube.svg" alt="유튜브">
+                            </figure>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <figure>
+                                <img src="Diesel/icon/sns_ticktok.svg" alt="틱톡">
+                            </figure>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <figure>
+                                <img src="Diesel/icon/sns_twitter.svg" alt="트위터">
+                            </figure>
+                        </a>
+                    </div><!-- .item end -->
+                </div>
+            </div><!-- .sns end -->
 
-                <div class="sns">
-                    <div class="item_wrap">
-                        <div class="item">
-                            <a href="#">
-                                <figure>
-                                    <img src="Diesel/icon/sns_instagram.svg" alt="인스타그램">
-                                </figure>
-                            </a>
-                        </div><!-- .item end -->
-                        <div class="item">
-                            <a href="#">
-                                <figure>
-                                    <img src="Diesel/icon/sns_facebook.svg" alt="페이스북">
-                                </figure>
-                            </a>
-                        </div><!-- .item end -->
-                        <div class="item">
-                            <a href="#">
-                                <figure>
-                                    <img src="Diesel/icon/sns_youtube.svg" alt="유튜브">
-                                </figure>
-                            </a>
-                        </div><!-- .item end -->
-                        <div class="item">
-                            <a href="#">
-                                <figure>
-                                    <img src="Diesel/icon/sns_ticktok.svg" alt="틱톡">
-                                </figure>
-                            </a>
-                        </div><!-- .item end -->
-                        <div class="item">
-                            <a href="#">
-                                <figure>
-                                    <img src="Diesel/icon/sns_twitter.svg" alt="트위터">
-                                </figure>
-                            </a>
-                        </div><!-- .item end -->
-                    </div>
-                </div><!-- .sns end -->
-
-                <footer class="footer">
-                    <div class="logo">
-                        <a href="#"><img src="Diesel/diesel로고.png" alt="로고"></a>
-                    </div>
-                    <div class="letter">
-                        <figure>
-                            <img src="Diesel/01_Module_LP_campaing_hero_D.webp" alt="뉴스레터">
-                        </figure>
-                        <div class="text">
-                            <div class="item01">
-                                <p>뉴스레터</p>
-                                <span>관심 있는 섹션을 선택하고 매주 새로운 소식과 트렌드를 받아보세요.</span>
-                                <fieldset>
-                                    <legend>email</legend>
-                                    <div>
-                                        <label for="email"></label>
-                                        <input type="email" name="email" id="email" placeholder="이메일">
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="male" id="male">
-                                        <label for="male">남성</label>
-                                        <input type="radio" name="female" id="female">
-                                        <label for="female">여성</label>
-                                    </div>
-                                </fieldset>
-                            </div><!-- .item01 end -->
-                            <div class="item02">
-                                <p>구 독</p>
-                            </div>
-                        </div><!-- .text end -->
-                    </div><!-- .letter end -->
-                    <div class="link">
-                        <div class="ad">
-                            <div>
-                                <span>고객센터</span>
-                                <div class="text">
-                                    <p>주문배송조회</p>
-                                    <p>결제 방법</p>
-                                    <p>반품 정책</p>
-                                    <p>문의하기</p>
+            <footer class="footer">
+                <div class="logo">
+                    <a href="#"><img src="Diesel/diesel로고.png" alt="로고"></a>
+                </div>
+                <div class="letter">
+                    <figure>
+                        <img src="Diesel/01_Module_LP_campaing_hero_D.webp" alt="뉴스레터">
+                    </figure>
+                    <div class="text">
+                        <div class="item01">
+                            <p>뉴스레터</p>
+                            <span>관심 있는 섹션을 선택하고 매주 새로운 소식과 트렌드를 받아보세요.</span>
+                            <fieldset>
+                                <legend>email</legend>
+                                <div>
+                                    <label for="email"></label>
+                                    <input type="email" name="email" id="email" placeholder="이메일">
                                 </div>
-                            </div>
-                            <div>
-                                <span>회사소개</span>
-                                <div class="text">
-                                    <p>About Diesel</p>
-                                    <p>채용</p>
-                                    <p>투자자</p>
+                                <div>
+                                    <input type="radio" name="male" id="male">
+                                    <label for="male">남성</label>
+                                    <input type="radio" name="female" id="female">
+                                    <label for="female">여성</label>
                                 </div>
+                            </fieldset>
+                        </div><!-- .item01 end -->
+                        <div class="item02">
+                            <p>구 독</p>
+                        </div>
+                    </div><!-- .text end -->
+                </div><!-- .letter end -->
+                <div class="link">
+                    <div class="ad">
+                        <div>
+                            <span>고객센터</span>
+                            <div class="text">
+                                <p>주문배송조회</p>
+                                <p>결제 방법</p>
+                                <p>반품 정책</p>
+                                <p>문의하기</p>
                             </div>
-                            <div>
-                                <span>개인정보 처리방침</span>
-                                <div class="text">
-                                    <p>쿠키 정책</p>
-                                    <p>이용약관</p>
-                                    <p>개인정보</p>
-                                </div>
+                        </div>
+                        <div>
+                            <span>회사소개</span>
+                            <div class="text">
+                                <p>About Diesel</p>
+                                <p>채용</p>
+                                <p>투자자</p>
                             </div>
-                        </div><!-- .ad end -->
-                        <span>Copyright © 2024 Diesel SpA - All rights reserved - VAT 00642650246 - v7.8.8</span>
-                    </div>
-                </footer><!-- .footer end -->
+                        </div>
+                        <div>
+                            <span>개인정보 처리방침</span>
+                            <div class="text">
+                                <p>쿠키 정책</p>
+                                <p>이용약관</p>
+                                <p>개인정보</p>
+                            </div>
+                        </div>
+                    </div><!-- .ad end -->
+                    <span>Copyright © 2024 Diesel SpA - All rights reserved - VAT 00642650246 - v7.8.8</span>
+                </div>
+            </footer><!-- .footer end -->
         </main>
     </div><!-- .wrap end -->
     <!-- Swiper JS -->
@@ -693,19 +1358,19 @@
         var swiper = new Swiper(".spot", {
             rewind: true,
             autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      effect: "creative",
-      creativeEffect: {
-        prev: {
-          shadow: true,
-          translate: ["-20%", 0, -1],
-        },
-        next: {
-          translate: ["100%", 0, 0],
-        },
-      },
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            effect: "creative",
+            creativeEffect: {
+                prev: {
+                    shadow: true,
+                    translate: ["-20%", 0, -1],
+                },
+                next: {
+                    translate: ["100%", 0, 0],
+                },
+            },
         });
 
         var swiper = new Swiper(".new", {
@@ -724,44 +1389,44 @@
             },
             breakpoints: {
                 1: {
-                slidesPerView: 1.6,
-                spaceBetween: 24,
+                    slidesPerView: 1.6,
+                    spaceBetween: 24,
                 },
                 320: {
-                slidesPerView: 2,
-                spaceBetween: 24,
+                    slidesPerView: 2,
+                    spaceBetween: 24,
                 },
                 390: {
-                slidesPerView: 2.5,
-                spaceBetween: 24,
+                    slidesPerView: 2.5,
+                    spaceBetween: 24,
                 },
                 535: {
-                slidesPerView: 2,
-                spaceBetween: 24,
+                    slidesPerView: 2,
+                    spaceBetween: 24,
                 },
                 767: {
-                slidesPerView: 2.5,
-                spaceBetween: 24,
+                    slidesPerView: 2.5,
+                    spaceBetween: 24,
                 },
                 960: {
-                slidesPerView: 3,
-                spaceBetween: 24,
+                    slidesPerView: 3,
+                    spaceBetween: 24,
                 },
                 1024: {
-                slidesPerView: 3,
-                spaceBetween: 24,
+                    slidesPerView: 3,
+                    spaceBetween: 24,
                 },
                 1280: {
-                slidesPerView: 3.5,
-                spaceBetween: 24,
+                    slidesPerView: 3.5,
+                    spaceBetween: 24,
                 },
                 1440: {
-                slidesPerView: 4,
-                spaceBetween: 24,
+                    slidesPerView: 4,
+                    spaceBetween: 24,
                 },
                 1920: {
-                slidesPerView: 5,
-                spaceBetween: 24,
+                    slidesPerView: 5,
+                    spaceBetween: 24,
                 },
             },
         });
