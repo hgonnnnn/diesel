@@ -208,7 +208,7 @@ body.on {
     margin: 15% auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    row-gap: 40px;
     justify-content: space-between;
 }
 .header .mobile_nav > .gnb > li {
@@ -970,9 +970,6 @@ input[type="radio"]:checked+label:after {
     }
     .footer .link .ad {
         justify-content: space-between;
-    }
-    .header .mobile_nav > .gnb {
-        row-gap: 25px;
     }
     .footer .link {
         width: 60%;
