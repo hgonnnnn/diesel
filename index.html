@@ -32,6 +32,7 @@
                 $('.header').toggleClass('off');
                 $('.mobile_nav').slideUp();
                 $('.header').removeAttr('style');
+                $('.header').removeClass('on');
                 
                 if (menuIcon.attr('src') === 'Diesel/icon/menu.svg') {
                     menuIcon.attr('src', 'Diesel/icon/icons8-지우다-48.png')
@@ -52,6 +53,7 @@
                     })
                 } else {
                     $('.header').removeAttr('style');
+                    $('.header').removeClass('on');
                 }
 
                 $('.mobile_nav').slideToggle();
