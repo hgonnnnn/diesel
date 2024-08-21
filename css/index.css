@@ -291,13 +291,13 @@ body.on {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: 0.3s;
+    transition: 0.6s;
 }
 .section01 .wrap .box:hover {
     border: none;
 }
 .section01 .wrap .box:hover a img {
-    transform: scale(1.04);
+    transform: scale(0.96);
 }
 .section01 .wrap .box p {
     font-family: 'semibold';
@@ -315,7 +315,7 @@ body.on {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: 0.3s;
+    transition: 1s;
 }
 .section01 .wrap .box p img {
     margin-left: 10px;
@@ -577,6 +577,8 @@ body.on {
     /* background-color: #E4002B; */
     /* color: #E4002B; */
     box-shadow: inset rgba(0, 0, 0, 0.2) 0px 4px 4px;
+    transform: scale(0.98);
+    transition: 0.3s;
 }
 .high {
     width: 100%;
@@ -612,6 +614,7 @@ body.on {
     max-height: 774px;
     height: 54.57vw;
     overflow: hidden;
+    box-shadow: 5px 5px 20px #000;
 }
 .high .high_inner > .item figure {
     width: 100%;
@@ -633,6 +636,8 @@ body.on {
     width: 48.27%;
     max-height: 375px;
     height: 26.40vw;
+    box-shadow: 5px 5px 20px #000;
+
 }
 .high .high_inner .item_wrap .item figure {
     width: 100%;
@@ -646,17 +651,20 @@ body.on {
 }
 .high .high_inner .item {
     position: relative;
+    overflow: hidden;
 }
 .high .high_inner .item:hover p {
     opacity: 1;
+    transition: 1s;
+
 }
 .high .high_inner > .item:hover figure img {
-    transform: scale(1.03);
-    transition: 0.4s;
+    transform: scale(0.95);
+    transition: 0.6s;
 }
 .high .high_inner .item_wrap .item:hover figure img {
-    transform: scale(1.03);
-    transition: 0.4s;
+    transform: scale(0.95);
+    transition: 0.6s;
 }
 .high .high_inner p{
     font-family: 'medium';
@@ -673,9 +681,7 @@ body.on {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
     opacity: 0;
-
 }
 .sns {
     max-width: 1420px;
