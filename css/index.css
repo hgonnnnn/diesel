@@ -659,11 +659,11 @@ body.on {
 
 }
 .high .high_inner > .item:hover figure img {
-    transform: scale(0.95);
+    transform: scale(1.03);
     transition: 0.6s;
 }
 .high .high_inner .item_wrap .item:hover figure img {
-    transform: scale(0.95);
+    transform: scale(1.03);
     transition: 0.6s;
 }
 .high .high_inner p{
