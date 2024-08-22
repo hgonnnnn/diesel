@@ -281,6 +281,7 @@ body.on {
     border: 2px solid #E4002B;
     position: relative;
     overflow: hidden;
+    /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4); */
 }
 .section01 .wrap .box:nth-child(2) {
     width: 336px;
@@ -614,7 +615,7 @@ body.on {
     max-height: 774px;
     height: 54.57vw;
     overflow: hidden;
-    box-shadow: 5px 5px 20px #000;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
 }
 .high .high_inner > .item figure {
     width: 100%;
@@ -636,7 +637,7 @@ body.on {
     width: 48.27%;
     max-height: 375px;
     height: 26.40vw;
-    box-shadow: 5px 5px 20px #000;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
 
 }
 .high .high_inner .item_wrap .item figure {
